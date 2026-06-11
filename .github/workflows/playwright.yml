@@ -48,7 +48,7 @@ jobs:
   deploy:
     name: Deploy site to GitHub Pages
     needs: test
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
