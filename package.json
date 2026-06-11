@@ -1,0 +1,12 @@
+{
+  "name": "ci-cd-learning-site",
+  "version": "1.0.0",
+  "description": "A tiny site for learning CI/CD with GitHub Actions and Playwright",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "http-server": "^14.1.1"
+  }
+}

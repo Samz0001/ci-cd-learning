@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Learning Site</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>CI/CD Learning Site</h1>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <p>This tiny site exists so we can practice building a CI/CD pipeline.</p>
+    <button id="showBtn">Click me</button>
+    <p id="message" hidden>Hello, CI/CD learner! 🎉</p>
+  </main>
+
+  <script>
+    document.getElementById('showBtn').addEventListener('click', () => {
+      document.getElementById('message').hidden = false;
+    });
+  </script>
+</body>
+</html>
