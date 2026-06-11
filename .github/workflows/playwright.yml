@@ -3,9 +3,9 @@ name: Playwright CI/CD
 # WHEN does this pipeline run?
 on:
   push:
-    branches: [main,master]
+    branches: [staging, master, main]
   pull_request:
-    branches: [main,master]
+    branches: [staging, master, main]
 
 # Allow this workflow to deploy to GitHub Pages
 permissions:
@@ -44,14 +44,14 @@ jobs:
           path: playwright-report/
           retention-days: 7
 
-  # ---------- CD: deploy to GitHub Pages ----------
-  deploy:
-    name: Deploy site to GitHub Pages
+  # ---------- CD: deploy to staging (auto, no approval) ----------
+  deploy_staging:
+    name: Deploy to staging (GitHub Pages)
     needs: test
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
+      name: staging
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout code
@@ -68,3 +68,15 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # ---------- CD: deploy to production (requires approval) ----------
+  deploy_production:
+    name: Deploy to production
+    needs: test
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+      - name: Release to production
+        run: echo "Approved! Releasing build to production now."
